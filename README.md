@@ -136,20 +136,26 @@ graph LR
 
 ## Daftar Perintah (Command Cheatsheet)
 
-### Perintah Publik (Semua Siswa)
+Semua siswa di grup dapat menggunakan seluruh perintah berikut secara bersama-sama untuk memantau dan memperbarui informasi kelas.
 
-| Perintah | Fungsi | Contoh |
-|---|---|---|
-| `@help` | Melihat panduan penggunaan | `@help` |
-| `@jadwal [hari]` | Melihat jadwal & tugas hari tertentu | `@jadwal Senin` / `@jadwal` |
-| `@listtugas` / `@list` | Melihat semua tugas aktif | `@listtugas` |
+### 1. Lihat Menu Bantuan (`@help`)
+```text
+@help
+```
 
-### Perintah Khusus Admin
+### 2. Lihat Jadwal Pelajaran (`@jadwal`)
+```text
+@jadwal [hari]
+```
+Contoh: `@jadwal Senin`, `@jadwal Selasa`, `@jadwal` (default ke hari ini/hari sekolah terdekat).
 
-*Hanya nomor terdaftar di `ADMIN_NUMBER` yang dapat melakukan mutasi data.*
+### 3. Lihat Tugas Aktif (`@listtugas` / `@list`)
+```text
+@listtugas
+```
 
-#### 1. Tambah Tugas (`@tugas`)
-Mendukung input alias toleran typo/huruf kecil (`mtk`, `bing`, `indo`, `devops`, `cyber`, dll). Kode unik otomatis dibuat (`MTK-01`, `MTK-02`, dst.).
+### 4. Tambah Tugas Baru (`@tugas`)
+Mendukung input alias toleran typo/huruf kecil (`mtk`, `bing`, `indo`, `devops`, `cyber`, dll). Kode tugas dibuat unik secara otomatis (`MTK-01`, `MTK-02`, dst.).
 ```text
 @tugas
 Mapel : Matematika
@@ -158,7 +164,7 @@ Deadline : Besok
 Catatan : Bawa buku berpetak
 ```
 
-#### 2. Edit Tugas (`@edit`)
+### 5. Edit Tugas (`@edit`)
 ```text
 @edit MTK-01
 Tugas : Latihan Soal Translasi
@@ -166,12 +172,12 @@ Deadline : Jumat
 Catatan : Jangan lupa kalkulator
 ```
 
-#### 3. Hapus Tugas (`@hapus`)
+### 6. Hapus / Arsipkan Tugas (`@hapus`)
 ```text
 @hapus MTK-01
 ```
 
-#### 4. Update Materi (`@materi`)
+### 7. Update Materi Mapel (`@materi`)
 ```text
 @materi MTK : Translasi
 ```

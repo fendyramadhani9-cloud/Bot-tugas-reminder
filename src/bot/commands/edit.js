@@ -3,13 +3,6 @@ import { parseTaskInput } from './tugas.js';
 import { isAdmin } from '../../utils/auth.js';
 
 export async function handleEdit(sock, chatJid, senderJid, rawText) {
-  if (!isAdmin(senderJid)) {
-    await sock.sendMessage(chatJid, {
-      text: 'Perintah ini hanya dapat digunakan oleh admin.'
-    });
-    return;
-  }
-
   // Extract first line or task code
   const lines = rawText.split('\n');
   const firstLine = lines[0].trim();

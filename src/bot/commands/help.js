@@ -14,7 +14,7 @@ atau
 @list
 Menampilkan seluruh tugas yang belum selesai.
 
-3. TAMBAH TUGAS (Admin)
+3. TAMBAH TUGAS
 @tugas
 Kirim @tugas untuk melihat template, atau kirim langsung dengan format:
 @tugas
@@ -23,15 +23,15 @@ Tugas : Mencatat materi
 Deadline : Besok
 Catatan : Bawa buku tugas
 
-4. EDIT TUGAS (Admin)
+4. EDIT TUGAS
 @edit [kode_tugas]
 Contoh: @edit MTK-01
 
-5. HAPUS TUGAS (Admin)
+5. HAPUS TUGAS
 @hapus [kode_tugas]
 Contoh: @hapus MTK-01
 
-6. UBAH MATERI (Admin)
+6. UBAH MATERI
 @materi [mapel] : [materi_baru]
 Contoh: @materi MTK : Translasi`;
 

@@ -2,13 +2,6 @@ import { archiveTask } from '../../services/taskService.js';
 import { isAdmin } from '../../utils/auth.js';
 
 export async function handleHapus(sock, chatJid, senderJid, argsText) {
-  if (!isAdmin(senderJid)) {
-    await sock.sendMessage(chatJid, {
-      text: 'Perintah ini hanya dapat digunakan oleh admin.'
-    });
-    return;
-  }
-
   const taskCode = argsText ? argsText.trim().toUpperCase() : '';
 
   if (!taskCode) {

@@ -39,13 +39,6 @@ export function parseTaskInput(text) {
 }
 
 export async function handleTugas(sock, chatJid, senderJid, rawText) {
-  if (!isAdmin(senderJid)) {
-    await sock.sendMessage(chatJid, {
-      text: 'Perintah ini hanya dapat digunakan oleh admin.'
-    });
-    return;
-  }
-
   const parsed = parseTaskInput(rawText);
 
   // If user just sent "@tugas" or missing required fields, send the input template

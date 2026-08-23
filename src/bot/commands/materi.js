@@ -2,13 +2,6 @@ import { updateMaterial } from '../../services/scheduleService.js';
 import { isAdmin } from '../../utils/auth.js';
 
 export async function handleMateri(sock, chatJid, senderJid, rawText) {
-  if (!isAdmin(senderJid)) {
-    await sock.sendMessage(chatJid, {
-      text: 'Perintah ini hanya dapat digunakan oleh admin.'
-    });
-    return;
-  }
-
   // Format: @materi [mapel] : [materi] OR @materi [mapel] [materi]
   const clean = rawText.replace(/@?materi\s*/i, '').trim();
   
