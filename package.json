@@ -1,0 +1,30 @@
+{
+  "name": "class-assistant-xii-tjkt-1",
+  "version": "1.0.0",
+  "description": "WhatsApp Bot Class Assistant for XII TJKT 1",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node test/test.js",
+    "seed": "node src/database/seed.js"
+  },
+  "keywords": [
+    "whatsapp-bot",
+    "baileys",
+    "school-assistant"
+  ],
+  "author": "Fendy Ramadhani",
+  "contributors": [
+    "Fendy Ramadhani (https://github.com/fendyramadhani9-cloud)",
+    "Deri Nugroho (https://github.com/Deri-Nugroho)"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.7.18",
+    "dotenv": "^16.4.7",
+    "node-cron": "^3.0.3",
+    "pino": "^9.6.0",
+    "qrcode-terminal": "^0.12.0"
+  }
+}
