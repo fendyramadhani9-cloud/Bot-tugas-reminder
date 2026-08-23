@@ -1,204 +1,241 @@
+<div align="center">
+
 # CLASS ASSISTANT — XII TJKT 1
+### WhatsApp Automation Bot for School Schedule & Tasks Management
 
-WhatsApp Assistant Bot untuk kelas XII TJKT 1. Dibuat dengan arsitektur yang mengutamakan:
-**SIMPLE → LIGHTWEIGHT → RELIABLE → EASY TO MAINTAIN**
+[![Node.js](https://img.shields.io/badge/Node.js-20%2B-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![SQLite](https://img.shields.io/badge/Database-SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
+[![Baileys](https://img.shields.io/badge/Engine-Baileys%20WA-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://github.com/WhiskeySockets/Baileys)
+[![Cron](https://img.shields.io/badge/Scheduler-Node--Cron-FF6C37?style=for-the-badge&logo=clock&logoColor=white)](https://www.npmjs.com/package/node-cron)
+[![PM2](https://img.shields.io/badge/Deploy-PM2%20Ready-2B037A?style=for-the-badge&logo=pm2&logoColor=white)](https://pm2.keymetrics.io/)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 
----
+<p align="center">
+  <b>Simple</b> • <b>Lightweight</b> • <b>Reliable</b> • <b>Easy to Maintain</b>
+</p>
 
-## Authors & Collaborators
-
-- **Fendy Ramadhani** — [GitHub](https://github.com/fendyramadhani9-cloud)
-- **Deri Nugroho** — [GitHub](https://github.com/Deri-Nugroho)
-
----
-
-## Tech Stack
-
-- **Runtime**: Node.js (ES Module)
-- **WhatsApp Library**: Baileys (`@whiskeysockets/baileys`)
-- **Database**: SQLite (Built-in `node:sqlite` / SQLite3)
-- **Scheduler**: `node-cron`
-- **Configuration**: `dotenv`
-- **Timezone**: `Asia/Jakarta` (WIB)
-- **Production Process Manager**: PM2
+</div>
 
 ---
 
-## Fitur & Jadwal Otomatis
+## 👥 Authors & Collaborators
 
-### 1. Daily Picket Reminder (Setiap Hari Pukul 06:30 WIB)
-- Mengirimkan daftar petugas piket hari ini.
-- Menampilkan rincian tugas piket harian.
-- **Logika Pengembalian MBG**:
-  - **Senin**: Piket Selasa bertanggung jawab mengembalikan MBG Senin pada hari Senin.
-  - **Selasa**: Piket Rabu mengembalikan MBG Selasa pada hari Selasa.
-  - **Rabu**: Piket Kamis mengembalikan MBG Rabu pada hari Rabu.
-  - **Kamis**: Piket Jumat mengembalikan MBG Kamis pada hari Kamis.
-  - **Jumat**: Piket Senin mengembalikan MBG Jumat pada hari Jumat.
+<div align="center">
 
-### 2. Weekly Kas Reminder (Setiap Hari Rabu Pukul 06:30 WIB)
-- Menyisipkan pengumuman tetap kas mingguan pada pesan piket:
-  ```text
-  PENGUMUMAN
+<table>
+  <tr>
+    <td align="center" width="220">
+      <a href="https://github.com/fendyramadhani9-cloud">
+        <img src="https://github.com/fendyramadhani9-cloud.png?size=120" width="100px;" alt="Fendy Ramadhani" style="border-radius:50%; box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: transform 0.3s;" /><br />
+        <sub><b>Fendy Ramadhani</b></sub>
+      </a>
+      <br />
+      <a href="https://github.com/fendyramadhani9-cloud">
+        <img src="https://img.shields.io/badge/Developer-Lead-0078D4?style=flat-square" />
+      </a>
+    </td>
+    <td align="center" width="220">
+      <a href="https://github.com/Deri-Nugroho">
+        <img src="https://github.com/Deri-Nugroho.png?size=120" width="100px;" alt="Deri Nugroho" style="border-radius:50%; box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: transform 0.3s;" /><br />
+        <sub><b>Deri Nugroho</b></sub>
+      </a>
+      <br />
+      <a href="https://github.com/Deri-Nugroho">
+        <img src="https://img.shields.io/badge/Collaborator-Developer-2EA44F?style=flat-square" />
+      </a>
+    </td>
+  </tr>
+</table>
 
-  Kas kelas : Rp5.000
-  ```
-
-### 3. Daily Study Reminder (Setiap Hari Pukul 18:30 WIB)
-- Mencari jadwal pelajaran dan tugas aktif untuk hari sekolah berikutnya.
-- **Logika Weekend**: Pada hari Jumat pukul 18:30 WIB, bot otomatis tidak mencari/mengirim jadwal hari Sabtu (skip).
-
-### 4. Scheduler Idempotency (Anti-Duplicate)
-- Menggunakan tabel `scheduler_logs` dengan constraint `UNIQUE(job_name, execution_date)` untuk mencegah pengiriman pesan pengingat ganda saat bot di-restart.
-
----
-
-## Daftar Perintah (Commands)
-
-### Perintah Siswa & Umum
-
-1. **Lihat Menu Bantuan**
-   ```text
-   @help
-   ```
-
-2. **Lihat Jadwal Pelajaran**
-   ```text
-   @jadwal [hari]
-   ```
-   Contoh: `@jadwal Senin`, `@jadwal Selasa`, `@jadwal` (default ke hari ini/hari sekolah terdekat).
-
-3. **Lihat Daftar Tugas Aktif**
-   ```text
-   @listtugas
-   ```
-   atau
-   ```text
-   @list
-   ```
-
-### Perintah Khusus Admin
-
-*Hanya nomor yang terdaftar di `ADMIN_NUMBER` pada file `.env` yang dapat menjalankan perintah mutasi data.*
-
-1. **Tambah Tugas Baru**
-   ```text
-   @tugas
-   ```
-   Format pengisian:
-   ```text
-   @tugas
-   Mapel : Matematika
-   Tugas : Mencatat materi
-   Deadline : Besok
-   Catatan : Jangan lupa belajar
-   ```
-   *Sistem mendukung alias penulisan mapel yang fleksibel (misal: `mtk`, `bing`, `indo`, `devops`, `cyber`, `jawa`, `kik`, `jepang`, `pp`, `tka`, `netadmin`, `pai`). Kode tugas (seperti `MTK-01`, `MTK-02`, `DEVOPS-01`) akan di-generate otomatis secara unik.*
-
-2. **Edit Tugas**
-   ```text
-   @edit [kode_tugas]
-   ```
-   Contoh: `@edit MTK-01`
-   Format perubahan:
-   ```text
-   @edit MTK-01
-   Tugas : Latihan Soal Bab 2
-   Deadline : Jumat
-   Catatan : Bawa buku berpetak
-   ```
-
-3. **Hapus / Arsipkan Tugas**
-   ```text
-   @hapus [kode_tugas]
-   ```
-   Contoh: `@hapus MTK-01`
-
-4. **Ubah Materi Mata Pelajaran**
-   ```text
-   @materi [mapel] : [materi_baru]
-   ```
-   Contoh: `@materi MTK : Translasi` atau `@materi Matematika : Logika Fuzzy`
+</div>
 
 ---
 
-## Panduan Instalasi & Menjalankan Bot
+## 🔄 System Architecture & Workflow
+
+```mermaid
+flowchart TD
+    subgraph Trigger [Pemicu Sistem]
+        A1[⏰ Cron 06:30 WIB]
+        A2[⏰ Cron 18:30 WIB]
+        A3[💬 Pesan WhatsApp Masuk]
+    end
+
+    subgraph Core [Logic & Security Layer]
+        B1{Cek scheduler_logs}
+        B2[Picket & MBG Service]
+        B3[Schedule & Task Service]
+        B4{Validasi Admin JID}
+        B5[Command Router]
+    end
+
+    subgraph Storage [Database Engine]
+        DB[(SQLite Database)]
+    end
+
+    subgraph Output [WhatsApp Dispatcher]
+        WA[Baileys Socket Connection]
+        TG[Target Chat / Group WA]
+    end
+
+    %% Cron 06:30 Flow
+    A1 --> B1
+    B1 -- Belum Eksekusi Hari Ini --> B2
+    B2 <--> DB
+    B2 --> WA --> TG
+
+    %% Cron 18:30 Flow
+    A2 --> B1
+    B1 -- Belum Eksekusi Hari Ini --> B3
+    B3 <--> DB
+    B3 --> WA --> TG
+
+    %% Message Flow
+    A3 --> B4
+    B4 -- Perintah Mutasi --> B5
+    B4 -- Perintah Publik --> B5
+    B5 <--> DB
+    B5 --> WA --> TG
+```
+
+---
+
+## ⏱️ Daily Routine & Timeline
+
+```mermaid
+gantt
+    title Jadwal Harian Otomatis Bot (Asia/Jakarta)
+    dateFormat HH:mm
+    axisFormat %H:%M
+
+    section Pagi Hari
+    Pengingat Piket & MBG (06:30)           :active, 06:30, 06:35
+    Pengumuman Kas Rp5.000 (Khusus Rabu)    :crit, 06:30, 06:35
+
+    section Sore Hari
+    Jadwal & Tugas Besok (18:30)            :active, 18:30, 18:35
+    Jumat Sore (Skip Hari Sabtu)            :done, 18:30, 18:35
+```
+
+---
+
+## 🍱 Siklus Logika Pengembalian MBG
+
+Sistem memastikan pengembalian MBG dilakukan tepat waktu oleh regu piket hari berikutnya pada hari yang sama:
+
+```mermaid
+graph LR
+    Senin[Piket Senin Ambil MBG] -->|Dikembalikan hari Senin oleh| Selasa[Piket Selasa]
+    Selasa -->|Dikembalikan hari Selasa oleh| Rabu[Piket Rabu]
+    Rabu -->|Dikembalikan hari Rabu oleh| Kamis[Piket Kamis]
+    Kamis -->|Dikembalikan hari Kamis oleh| Jumat[Piket Jumat]
+    Jumat -->|Dikembalikan hari Jumat oleh| Senin
+```
+
+---
+
+## 🤖 Daftar Perintah (Command Cheatsheet)
+
+### 👤 Perintah Publik (Semua Siswa)
+
+| Perintah | Fungsi | Contoh |
+|---|---|---|
+| `@help` | Melihat panduan penggunaan | `@help` |
+| `@jadwal [hari]` | Melihat jadwal & tugas hari tertentu | `@jadwal Senin` / `@jadwal` |
+| `@listtugas` / `@list` | Melihat semua tugas aktif | `@listtugas` |
+
+### 🔑 Perintah Khusus Admin
+
+*Hanya nomor terdaftar di `ADMIN_NUMBER` yang dapat melakukan mutasi data.*
+
+#### 1. Tambah Tugas (`@tugas`)
+Mendukung input alias toleran typo/huruf kecil (`mtk`, `bing`, `indo`, `devops`, `cyber`, dll). Kode unik otomatis dibuat (`MTK-01`, `MTK-02`, dst.).
+```text
+@tugas
+Mapel : Matematika
+Tugas : Mencatat materi
+Deadline : Besok
+Catatan : Bawa buku berpetak
+```
+
+#### 2. Edit Tugas (`@edit`)
+```text
+@edit MTK-01
+Tugas : Latihan Soal Translasi
+Deadline : Jumat
+Catatan : Jangan lupa kalkulator
+```
+
+#### 3. Hapus Tugas (`@hapus`)
+```text
+@hapus MTK-01
+```
+
+#### 4. Update Materi (`@materi`)
+```text
+@materi MTK : Translasi
+```
+
+---
+
+## 🚀 Panduan Instalasi & Menjalankan
 
 ### 1. Prasyarat
-- Node.js (v20 atau lebih baru)
+- Node.js v20+
 - Git
 
-### 2. Clone Repository & Install Dependencies
+### 2. Clone & Install
 ```bash
 git clone https://github.com/fendyramadhani9-cloud/Bot-tugas-reminder.git
 cd Bot-tugas-reminder
 npm install
 ```
 
-### 3. Konfigurasi Environment Variable
-Salin template konfigurasi:
+### 3. Konfigurasi `.env`
+Salin template:
 ```bash
 cp .env.example .env
 ```
-Buka file `.env` dan isi variabel berikut:
+Isi variabel:
 ```env
-# ID Chat WhatsApp Tujuan (Group JID atau Personal JID)
-# Contoh Group JID: 12036304xxxxxxxxxx@g.us
 WA_TARGET_CHAT_ID=12036304xxxxxxxxxx@g.us
-
-# Nomor WhatsApp Admin (hanya nomor ini yang dapat mutasi data)
-# Format: kode negara tanpa tanda + (contoh: 6281234567890)
 ADMIN_NUMBER=6281234567890
-
-# Timezone
 TIMEZONE=Asia/Jakarta
 ```
 
-### 4. Jalankan Bot (Scan QR Login)
+### 4. Jalankan (Scan QR Login)
 ```bash
 npm start
 ```
-1. Buka aplikasi WhatsApp di ponsel.
-2. Masuk ke **Perangkat Tertaut (Linked Devices)** > **Tautkan Perangkat**.
-3. Scan QR Code yang tercetak di terminal.
-4. Kredensial autentikasi akan tersimpan di direktori `auth/` secara lokal dan persisten.
+Scan QR yang muncul di terminal melalui WhatsApp di ponsel (**Perangkat Tertaut**).
 
 ---
 
-## Deployment ke Server Production (Linux / LXC / VM / Proxmox)
-
-Gunakan **PM2** agar bot berjalan stabil di background dan otomatis restart bila server reboot:
+## ⚙️ Deployment Server / Proxmox (PM2)
 
 ```bash
-# Install PM2 jika belum ada
+# Install PM2
 npm install -g pm2
 
-# Jalankan bot dengan nama class-assistant
+# Start Bot di background
 pm2 start src/index.js --name class-assistant
 
-# Simpan process list PM2
+# Simpan state & autostart saat boot
 pm2 save
-
-# Aktifkan startup hook sistem
 pm2 startup
 ```
 
-### Monitoring PM2:
-- `pm2 logs class-assistant` : Melihat log realtime
-- `pm2 status` : Memeriksa status proses
-- `pm2 restart class-assistant` : Me-restart bot
-
 ---
 
-## Pengujian / Unit Tests
+## 🧪 Testing
 
-Jalankan rangkaian test otomatis untuk memverifikasi seluruh modul:
+Jalankan test suite untuk memvalidasi database, format pesan, MBG logic, dan scheduler:
 ```bash
 npm test
 ```
 
 ---
 
-## License
+## 📄 License
 
-Didistribusikan di bawah lisensi MIT. Lihat file [LICENSE](LICENSE) untuk informasi lebih lanjut.
+Didistribusikan di bawah [MIT License](LICENSE). Copyright (c) 2026 **Fendy Ramadhani** & **Deri Nugroho**.
