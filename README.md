@@ -205,7 +205,6 @@ cp .env.example .env
 Isi variabel:
 ```env
 WA_TARGET_CHAT_ID=12036304xxxxxxxxxx@g.us
-ADMIN_NUMBER=6281234567890
 TIMEZONE=Asia/Jakarta
 ```
 
