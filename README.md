@@ -18,7 +18,7 @@
 
 ---
 
-## 👥 Authors & Collaborators
+## Authors & Collaborators
 
 <div align="center">
 
@@ -26,7 +26,7 @@
   <tr>
     <td align="center" width="220">
       <a href="https://github.com/fendyramadhani9-cloud">
-        <img src="https://github.com/fendyramadhani9-cloud.png?size=120" width="100px;" alt="Fendy Ramadhani" style="border-radius:50%; box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: transform 0.3s;" /><br />
+        <img src="https://github.com/fendyramadhani9-cloud.png?size=120" width="100px;" alt="Fendy Ramadhani" style="border-radius:50%; box-shadow: 0 4px 8px rgba(0,0,0,0.2);" /><br />
         <sub><b>Fendy Ramadhani</b></sub>
       </a>
       <br />
@@ -36,7 +36,7 @@
     </td>
     <td align="center" width="220">
       <a href="https://github.com/Deri-Nugroho">
-        <img src="https://github.com/Deri-Nugroho.png?size=120" width="100px;" alt="Deri Nugroho" style="border-radius:50%; box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: transform 0.3s;" /><br />
+        <img src="https://github.com/Deri-Nugroho.png?size=120" width="100px;" alt="Deri Nugroho" style="border-radius:50%; box-shadow: 0 4px 8px rgba(0,0,0,0.2);" /><br />
         <sub><b>Deri Nugroho</b></sub>
       </a>
       <br />
@@ -51,14 +51,14 @@
 
 ---
 
-## 🔄 System Architecture & Workflow
+## System Architecture & Workflow
 
 ```mermaid
 flowchart TD
     subgraph Trigger [Pemicu Sistem]
-        A1[⏰ Cron 06:30 WIB]
-        A2[⏰ Cron 18:30 WIB]
-        A3[💬 Pesan WhatsApp Masuk]
+        A1[Cron 06:30 WIB]
+        A2[Cron 18:30 WIB]
+        A3[Pesan WhatsApp Masuk]
     end
 
     subgraph Core [Logic & Security Layer]
@@ -100,7 +100,7 @@ flowchart TD
 
 ---
 
-## ⏱️ Daily Routine & Timeline
+## Daily Routine & Timeline
 
 ```mermaid
 gantt
@@ -119,7 +119,7 @@ gantt
 
 ---
 
-## 🍱 Siklus Logika Pengembalian MBG
+## Siklus Logika Pengembalian MBG
 
 Sistem memastikan pengembalian MBG dilakukan tepat waktu oleh regu piket hari berikutnya pada hari yang sama:
 
@@ -129,14 +129,14 @@ graph LR
     Selasa -->|Dikembalikan hari Selasa oleh| Rabu[Piket Rabu]
     Rabu -->|Dikembalikan hari Rabu oleh| Kamis[Piket Kamis]
     Kamis -->|Dikembalikan hari Kamis oleh| Jumat[Piket Jumat]
-    Jumat -->|Dikembalikan hari Jumat oleh| Senin
+    Jumat -->|Dikembalikan hari Jumat oleh| Senin[Piket Senin]
 ```
 
 ---
 
-## 🤖 Daftar Perintah (Command Cheatsheet)
+## Daftar Perintah (Command Cheatsheet)
 
-### 👤 Perintah Publik (Semua Siswa)
+### Perintah Publik (Semua Siswa)
 
 | Perintah | Fungsi | Contoh |
 |---|---|---|
@@ -144,7 +144,7 @@ graph LR
 | `@jadwal [hari]` | Melihat jadwal & tugas hari tertentu | `@jadwal Senin` / `@jadwal` |
 | `@listtugas` / `@list` | Melihat semua tugas aktif | `@listtugas` |
 
-### 🔑 Perintah Khusus Admin
+### Perintah Khusus Admin
 
 *Hanya nomor terdaftar di `ADMIN_NUMBER` yang dapat melakukan mutasi data.*
 
@@ -178,7 +178,7 @@ Catatan : Jangan lupa kalkulator
 
 ---
 
-## 🚀 Panduan Instalasi & Menjalankan
+## Panduan Instalasi & Menjalankan
 
 ### 1. Prasyarat
 - Node.js v20+
@@ -211,7 +211,7 @@ Scan QR yang muncul di terminal melalui WhatsApp di ponsel (**Perangkat Tertaut*
 
 ---
 
-## ⚙️ Deployment Server / Proxmox (PM2)
+## Deployment Server / Proxmox (PM2)
 
 ```bash
 # Install PM2
@@ -227,7 +227,7 @@ pm2 startup
 
 ---
 
-## 🧪 Testing
+## Testing
 
 Jalankan test suite untuk memvalidasi database, format pesan, MBG logic, dan scheduler:
 ```bash
@@ -236,6 +236,6 @@ npm test
 
 ---
 
-## 📄 License
+## License
 
 Didistribusikan di bawah [MIT License](LICENSE). Copyright (c) 2026 **Fendy Ramadhani** & **Deri Nugroho**.
