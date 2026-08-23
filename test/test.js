@@ -20,11 +20,11 @@ seedDatabase();
 
 const subjects = db.prepare('SELECT * FROM subjects ORDER BY id ASC').all();
 assert(subjects.length === 12, `Expected 12 subjects, got ${subjects.length}`);
-console.log('✅ Subjects count: 12');
+console.log('[OK] Subjects count: 12');
 
 const schedulesCount = db.prepare('SELECT COUNT(*) as count FROM schedules').get().count;
 assert(schedulesCount === 18, `Expected 18 schedule entries, got ${schedulesCount}`);
-console.log('✅ Schedules count: 18 (UP-12 properly excluded)');
+console.log('[OK] Schedules count: 18 (UP-12 properly excluded)');
 
 // 2. Test MBG Logic
 console.log('\nTest 2: Verifying MBG Logic for all days...');
@@ -42,7 +42,7 @@ assert.strictEqual(mbgThu.returnerDayName, 'Jumat', 'Kamis MBG must be returned 
 
 const mbgFri = getMbgReturnTeam(5);
 assert.strictEqual(mbgFri.returnerDayName, 'Senin', 'Jumat MBG must be returned by Piket Senin');
-console.log('✅ MBG return rotation is 100% accurate (Mon->Tue, Tue->Wed, Wed->Thu, Thu->Fri, Fri->Mon)');
+console.log('[OK] MBG return rotation is 100% accurate (Mon->Tue, Tue->Wed, Wed->Thu, Thu->Fri, Fri->Mon)');
 
 // 3. Test Picket Lists
 console.log('\nTest 3: Verifying Picket Member lists...');
@@ -50,7 +50,7 @@ const seninMembers = getPicketMembersByDay(1);
 assert(seninMembers.includes('Ghazi') && seninMembers.includes('Jelita'), 'Senin members mismatch');
 const rabuMembers = getPicketMembersByDay(3);
 assert(rabuMembers.includes('Deri') && rabuMembers.includes('Rahayu'), 'Rabu members mismatch');
-console.log('✅ Picket lists verified for class XII TJKT 1');
+console.log('[OK] Picket lists verified for class XII TJKT 1');
 
 // 4. Test Task Service & Task Code Generation
 console.log('\nTest 4: Testing Task Creation & Auto-Code Generation...');
@@ -88,7 +88,7 @@ const subDev = findSubject('dev');
 assert.strictEqual(subDev.code, 'DEVOPS');
 const subCyber = findSubject('cybersec');
 assert.strictEqual(subCyber.code, 'CYBER');
-console.log(`✅ Created tasks: ${t1.taskCode}, ${t2.taskCode}, ${t3.taskCode} and validated flexible subject aliases`);
+console.log(`[OK] Created tasks: ${t1.taskCode}, ${t2.taskCode}, ${t3.taskCode} and validated flexible subject aliases`);
 
 // 5. Test Schedule with Tasks & Material Update
 console.log('\nTest 5: Testing Schedule Retrieval with Tasks & Material...');
@@ -98,7 +98,7 @@ const mtkItem = wedSchedule.find(s => s.subjectCode === 'MTK');
 assert(mtkItem, 'Matematika not found in Wednesday schedule');
 assert.strictEqual(mtkItem.material, 'Translasi');
 assert.strictEqual(mtkItem.tasks.length, 2, 'Matematika should have 2 active tasks');
-console.log('✅ Schedule with dynamic tasks & updated material verified');
+console.log('[OK] Schedule with dynamic tasks & updated material verified');
 
 // 6. Test Task Update & Archival
 console.log('\nTest 6: Testing Task Edit and Soft Delete (Archive)...');
@@ -114,7 +114,7 @@ assert(deletedT1, 'Task should be archived');
 
 const checkActive = getTaskByCode('MTK-01');
 assert.strictEqual(checkActive, null, 'Archived task should not be returned by getTaskByCode');
-console.log('✅ Task edit & soft delete verified');
+console.log('[OK] Task edit & soft delete verified');
 
 // 7. Test Weekend / School Day logic
 console.log('\nTest 7: Testing School Day logic (Friday skip, Mon-Thu next day)...');
@@ -125,7 +125,7 @@ assert.strictEqual(tomMon.dayOfWeek, 2, 'Monday evening should point to Tuesday 
 const fakeFriday = new Date('2026-08-28T18:30:00+07:00'); // Friday
 const tomFri = getTomorrowSchoolDay(fakeFriday);
 assert.strictEqual(tomFri, null, 'Friday evening should return null (skip Saturday)');
-console.log('✅ Weekend and Friday skip logic verified');
+console.log('[OK] Weekend and Friday skip logic verified');
 
 // 8. Test Scheduler Idempotency
 console.log('\nTest 8: Testing Scheduler Log Idempotency...');
@@ -136,7 +136,7 @@ assert.strictEqual(isFirst, true, 'First execution must return true');
 const isSecond = recordJobExecution('TEST_JOB', testDate);
 assert.strictEqual(isSecond, false, 'Second execution on same day must return false');
 assert.strictEqual(isJobExecuted('TEST_JOB', testDate), true);
-console.log('✅ Scheduler duplicate execution prevention verified');
+console.log('[OK] Scheduler duplicate execution prevention verified');
 
 // 9. Test Auth Helper
 console.log('\nTest 9: Testing Admin Auth...');
@@ -144,7 +144,7 @@ process.env.ADMIN_NUMBER = '6281234567890';
 assert.strictEqual(isAdmin('6281234567890@s.whatsapp.net'), true);
 assert.strictEqual(isAdmin('6281234567890:1@s.whatsapp.net'), true);
 assert.strictEqual(isAdmin('6289999999999@s.whatsapp.net'), false);
-console.log('✅ Admin authorization verification verified');
+console.log('[OK] Admin authorization verification verified');
 
 // 10. Test Formatters Output
 console.log('\nTest 10: Testing Clean Formatters...');
@@ -162,12 +162,12 @@ const picketFormatted = formatPicketReminder('Rabu, 26 Agustus 2026', rabuMember
 assert(picketFormatted.includes('JADWAL PIKET'));
 assert(picketFormatted.includes('Pengembalian MBG:\nPiket Kamis'));
 assert(picketFormatted.includes('Kas kelas : Rp5.000'));
-console.log('✅ Output formatters strictly match prompt specification');
+console.log('[OK] Output formatters strictly match prompt specification');
 
 // Cleanup test tasks
 db.exec("DELETE FROM tasks WHERE description LIKE 'Test Task%'");
 db.exec("DELETE FROM scheduler_logs WHERE job_name = 'TEST_JOB'");
 
 console.log('\n============================================================');
-console.log('🎉 ALL TESTS PASSED SUCCESSFULLY! (10/10)');
+console.log('ALL TESTS PASSED SUCCESSFULLY! (10/10)');
 console.log('============================================================\n');
