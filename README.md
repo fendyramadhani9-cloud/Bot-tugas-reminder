@@ -41,7 +41,7 @@
       </a>
       <br />
       <a href="https://github.com/Deri-Nugroho">
-        <img src="https://img.shields.io/badge/Collaborator-Developer-2EA44F?style=flat-square" />
+        <img src="https://img.shields.io/badge/DevOps-Deployment%20%26%20CI%2FCD-2EA44F?style=flat-square" />
       </a>
     </td>
   </tr>

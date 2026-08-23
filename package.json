@@ -14,10 +14,18 @@
     "baileys",
     "school-assistant"
   ],
-  "author": "Fendy Ramadhani",
+  "author": "Fendy Ramadhani (Lead Developer)",
   "contributors": [
-    "Fendy Ramadhani (https://github.com/fendyramadhani9-cloud)",
-    "Deri Nugroho (https://github.com/Deri-Nugroho)"
+    {
+      "name": "Fendy Ramadhani",
+      "url": "https://github.com/fendyramadhani9-cloud",
+      "role": "Lead Developer & System Architect"
+    },
+    {
+      "name": "Deri Nugroho",
+      "url": "https://github.com/Deri-Nugroho",
+      "role": "Deployment & Maintenance"
+    }
   ],
   "license": "MIT",
   "dependencies": {
